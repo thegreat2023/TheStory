@@ -9,17 +9,15 @@ const io = new Server(server);
 
 // Socket.io
 io.on("connection", (socket) => {
-  console.log("a user connected"); // Debugging line
   socket.on("user-message", (message) => {
-    console.log("message received:", message); // Debugging line
     io.emit("message", message);
   });
 });
 
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve("./public")));
 
 app.get("/", (req, res) => {
-  return res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  return res.sendFile("/public/index.html");
 });
 
 server.listen(9000, () => console.log(`Server Started at PORT:9000`));
