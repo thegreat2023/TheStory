@@ -7,17 +7,22 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Socket.io
+// Handle Socket.io connections
 io.on("connection", (socket) => {
+  console.log("a user connected");
   socket.on("user-message", (message) => {
-    io.emit("message", message);
+    io.emit("message", message); // Broadcast the message to all connected clients
   });
 });
 
-app.use(express.static(path.resolve("./public")));
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
 
+// Serve the index.html file
 app.get("/", (req, res) => {
-  return res.sendFile("/public/index.html");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-server.listen(9000, () => console.log(`Server Started at PORT:9000`));
+// Start the server
+const PORT = process.env.PORT || 9000;
+server.listen(PORT, () => console.log(`Server started at PORT:${PORT}`));
