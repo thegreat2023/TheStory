@@ -1,60 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat App</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-      }
-      #messages {
-        margin-top: 10px;
-      }
-      p {
-        background: #f4f4f4;
-        padding: 5px;
-        border-radius: 4px;
-      }
-    </style>
+    <title> </title>
   </head>
-  <body>
-    <h1>Chatting</h1>
-    <input type="text" id="message" placeholder="Enter Message" />
-    <button id="sendBtn">Send</button>
-    <div id="messages"></div>
+<body> 
+  Selection	ID	Gender	Age
+Humanity	shreyashshukla_	Male	20 yrs
+Understand	n_tanjiro	Male	10-18 yrs
+Understand	winfrelo	Male	23 yrs
+Revenge	saikat0538	Male	17 yrs
+Humanity	skmarts	Male	18 yrs
+Humanity	feelingzade	Male	17 yrs
+Killer	notshash	Male	17 yrs
+Humanity	anshu.lyl	Female	
+Understand	amzatch	Male	17 yrs
+Understand	_sussyfus	Male	18+ yrs
+Understand	dev_pvt.69	Male	15-18 yrs
+Understand	ewww_99	Female	19 yrs
+Humanity	goku_kumar_	Male	20 yrs
+Revenge	whos_ril	Female	
+Understand	diss.liss.ne		
+Humanity	hionerl	Male	
+Humanity	chicken_soup4k	Male	13-18 yrs
+Understand	itzdarkfrost	Male	14 yrs
+Understand	unreal181881	Male	20 yrs
+Revenge	kingpaka909	Male	20 yrs
+Killer	calmmm_.	Male	20 yrs
+Understand	zuzu3392	Male	
+Understand	ijustreadbooks	Female	19 yrs
+Understand	halchal	Male	19 yrs
+Humanity	leafy_sparkle	Female	15 yrs
+Revenge	aayush_00k	Male	19 yrs
+Understand	shiyan779613	Male	21 yrs
+Understand	.wonka_69	Male	16 yrs
+Humanity	jjiinko	Female	19 yrs
+Revenge	letheroin_hit	Male	23 yrs
+Revenge	appxle	Female	14 yrs
+Revenge	rishiii._.	Male	18 yrs
+Revenge	.yuviii_69	Male	16 yrs
+			
+2nd ROUND			
+			
+Humanity	marzthedevious.ly	Male	15 yrs
+Humanity	elpha_killer77	Female	16 yrs
+Understand	rem_zoeyy	Female	16 yrs
+Understand	 _marco.taich	Male	21 yrs
+Humanity	bluebexxy2418	Female	16 yrs
+Killer	indefatigable	Male	14 yrs
+Humanity	sxbhhh	Male	16 yrs
+Revenge	 infernal_blade_	Male	17 yrs
+Humanity	mr_random.ly	Male	18 yrs
+Revenge	unknowm0000s	Female	23 yrs
+Killer	lab.rinth.	Male	16 yrs
+Humanity	salvatore.ly	Male	15 yrs
+Revenge	peace.iy	Male	13 yrs
+Humanity	aurora_85058	Female	13-16 yrs
+Understand	chiru78	Male 	19 yrs
+Killer	ay09299	Male	17 yrs
+Humanity	 _hash.py	Male	20 yrs
+Revenge	zara.ly	Female	13 yrs
+Revenge	aka_og	Male	18 yrs
+Humanity	milangarg_	Male	16 yrs
+Revenge	_simply.bharathhh	Male	16 yrs
+Revenge	expliot007	Male	19 yrs
+Understand	xscowo	Male	15 yrs
+Revenge	 ethical_955	Male	18 yrs
+Killer	god_gojo777	Male	14 yrs
+Understand	lonewqlf	Male	14 yrs
+Revenge	rashiii___	Female	20 yrs
+Revenge	 _axmaan24	Male	15 yrs
+Killer	badnam_ladka96	Male	15 yrs
+Killer	tsunami_99	Female	
+Humanity	serena143	Female	
+Revenge	th.izu	Female	
+Humanity	shantelluv_70449	Female	29 yrs
+			
+3rd ROUND			
+			
+Understand	luvvvamelia	Female	56 yrs
+Revenge	tinkudon	Male 	19 yrs
+Revenge	r444rajj	Male 	18 yrs
+Humanity	gr3y1n.gr33n_	Female	
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const socket = io();
-      const sendBtn = document.getElementById('sendBtn');
-      const messageInput = document.getElementById('message');
-      const allMessages = document.getElementById('messages');
-
-      // Listen for 'message' events from the server
-      socket.on('message', (message) => {
-        const p = document.createElement('p');
-        p.innerText = message;
-        allMessages.appendChild(p);
-      });
-
-      // Send message on button click
-      sendBtn.addEventListener('click', () => {
-        const message = messageInput.value;
-        if (message) {
-          socket.emit('user-message', message);
-          messageInput.value = ''; // Clear the input field after sending
-        }
-      });
-
-      // Optionally, send message on Enter key press
-      messageInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          sendBtn.click();
-        }
-      });
-    </script>
-  </body>
-</html>
+</body></html>
