@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title> </title>
-  </head>
-<body> 
-  Selection	ID	Gender	Age
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Data Formatter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #output {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Excel Data Formatter</h1>
+	Selection	ID	Gender	Age
 Humanity	shreyashshukla_	Male	20 yrs
 Understand	n_tanjiro	Male	10-18 yrs
 Understand	winfrelo	Male	23 yrs
@@ -82,4 +97,20 @@ Revenge	tinkudon	Male 	19 yrs
 Revenge	r444rajj	Male 	18 yrs
 Humanity	gr3y1n.gr33n_	Female	
 
-</body></html>
+    <textarea id="excelData" rows="10" cols="50" placeholder="Paste your Excel data here"></textarea>
+    <button id="formatBtn">Format Data</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('formatBtn').addEventListener('click', () => {
+            const excelData = document.getElementById('excelData').value;
+            const output = formatExcelData(excelData);
+            document.getElementById('output').innerText = output;
+        });
+
+        function formatExcelData(data) {
+            return data.replace(/\t/g, '    ').replace(/\r?\n/g, '\n'); // Replace tabs with spaces and normalize line breaks
+        }
+    </script>
+</body>
+</html>
