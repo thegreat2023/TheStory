@@ -1,5 +1,4 @@
-// script.js
-const userInput = document.getElementById('user-input');
+// script.jsconst userInput = document.getElementById('user-input');
 const submitBtn = document.getElementById('submit-btn');
 const textDisplay = document.getElementById('text-display');
 
