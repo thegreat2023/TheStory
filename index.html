@@ -1,53 +1,91 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <title> Kani avmp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Data on GitHub</title>
 </head>
-
 <body>
-	
-<center><h1></h1>The Story</h1></center>
-	
-<pre><center>Hello i used to be known as Fire Minecraft in 2021 days but then in the next year Everything had to be started newly so then The Great Person 
-came into the history The Mis Meckz, been popular more than Fire Minecraft in 2022 days.
-</pre>
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
 
-<pre><center>
-On 6 March 2023 Mis Meckz started a new vision of seeing World 
-
-when came in contact with Cemetery. Later Meckz one dialouge got too famous 
-
-among
-his fans "I'm the GREAT" people who've met Meckz are so lucky because 
-
-this is the only person with that mindset,vision,emotion 
-
-andunderstandings.</pre><pre><center>In August 2023 Cemetery started to end 3 
-
-Years of Journey and a New group had been waiting for Meckz New Entry
-
-On 26 
-
-October 2023 Meckz came into a Group which never had name, and this journey of 
-
-Meckz went even more better than Cemtery. In Group of unkown 
-name Meckz gained 
-
-the Title of "Meckz The GREAT" and on 14 November 2023 Annabelle came and took 
-
-this Meckz Journey to the next level.
-
-</pre> <a href="indexl.html">Starting of The Duality</a>
-
-
-<div style="
-height"25px;
-color:blue;">
-	
-</div>
-
+    <script src="github-api.js"></script>
 </body>
-
 </html>
+<script> 
+	document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    const userData = {
+        name: name,
+        email: email
+    };
+
+    // GitHub API parameters
+    const repoOwner = 'your-username';
+    const repoName = 'your-repo';
+    const filePath = 'data.json';
+    const githubToken = 'your-personal-access-token';
+
+    // Fetch the existing data from the GitHub repository
+    fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `token ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        let existingContent = '';
+        if (data.content) {
+            existingContent = atob(data.content); // Decode base64 content
+        }
+
+        let updatedData;
+        try {
+            const existingData = JSON.parse(existingContent) || [];
+            existingData.push(userData);
+            updatedData = JSON.stringify(existingData, null, 2); // Update with new data
+        } catch (e) {
+            updatedData = JSON.stringify([userData], null, 2); // Start with fresh data if JSON is invalid
+        }
+
+        const base64Content = btoa(updatedData); // Encode content to base64
+
+        // Update the file on GitHub
+        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${githubToken}`,
+                'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify({
+                message: 'Updating data.json',
+                content: base64Content,
+                sha: data.sha // SHA is needed for updates
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.content) {
+                alert('User data saved successfully on GitHub!');
+            } else {
+                console.error(result);
+                alert('Failed to save data on GitHub.');
+            }
+        });
+    });
+});
+
+</script>
