@@ -32,16 +32,16 @@
     };
 
     // GitHub API parameters
-    const repoOwner = 'your-username';
-    const repoName = 'your-repo';
+    const repoOwner = 'thegreat2023';
+    const repoName = 'TheStory';
     const filePath = 'data.json';
-    const githubToken = 'your-personal-access-token';
+    const githubToken = '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';
 
     // Fetch the existing data from the GitHub repository
-    fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+    fetch(`https://api.github.com/repos/${thegreat2023}/${TheStory}/contents/${data.json}`, {
         method: 'GET',
         headers: {
-            'Authorization': `token ${githubToken}`,
+            'Authorization': `token ${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}`,
             'Accept': 'application/vnd.github.v3+json'
         }
     })
@@ -64,10 +64,10 @@
         const base64Content = btoa(updatedData); // Encode content to base64
 
         // Update the file on GitHub
-        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
+        fetch(`https://api.github.com/repos/${thegreat2023}/${TheStory}/contents/${data.json}`, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${githubToken}`,
+                'Authorization': `token ${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}`,
                 'Accept': 'application/vnd.github.v3+json'
             },
             body: JSON.stringify({
