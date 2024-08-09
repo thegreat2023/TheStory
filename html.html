@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input</title>
+</head>
+<body>
+    <input type="text" id="userInput" placeholder="Enter your text">
+    <button onclick="storeData()">Store Data</button>
+
+    <script>
+        function storeData() {
+            const userInput = document.getElementById("userInput").value;
+            const data = {
+                userText: userInput
+            };
+
+            // Store the data in a JSON file (client-side)
+            const jsonData = JSON.stringify(data);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'data.json';
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
