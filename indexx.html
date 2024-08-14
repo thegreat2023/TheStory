@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Input Form</title>
+</head>
+<body>
+    <h1>User Input Form</h1>
+    <form id="user-input-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>User Inputs:</h2>
+    <ul id="user-inputs"></ul>
+
+    <script>
+        const form = document.getElementById('user-input-form');
+        const userInputList = document.getElementById('user-inputs');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            const apiUrl = 'https://api.github.com/repos/thegreat2023/TheStory/issues';
+            const headers = {
+                'Authorization': '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',
+                'Content-Type': 'application/json'
+            };
+            const data = {
+                'title': `User Input from ${name}`,
+                'body': message
+            };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(data)
+                });
+                const issue = await response.json();
+                console.log(`Issue created: ${issue.html_url}`);
+                // Add user input to list
+                const userInputListItem = document.createElement('li');
+                userInputListItem.textContent = `Name: ${name}, Message: ${message}`;
+                userInputList.appendChild(userInputListItem);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        // Fetch user inputs from API and display them
+        async function fetchUserInputs() {
+            const apiUrl = 'https://api.github.com/repos/thegreat2023/TheStory/issues';
+            const headers = {
+                'Authorization': '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',
+                'Content-Type': 'application/json'
+            };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers
+                });
+                const issues = await response.json();
+                issues.forEach((issue) => {
+                    const userInputListItem = document.createElement('li');
+                    userInputListItem.textContent = `Name: ${issue.title}, Message: ${issue.body}`;
+                    userInputList.appendChild(userInputListItem);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchUserInputs();
+    </script>
+</body>
+</html>
